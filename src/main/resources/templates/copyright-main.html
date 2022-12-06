@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<h1>Авторское свидетельство</h1>
+<a sec:authorize="hasAuthority('ADMIN') or hasAuthority('RESEARCHER')" th:href="'/copyright/add'">Добавить свидетельство</a>
+<hr/>
+<p>Поиск по номеру сертификата</p>
+<form sec:authorize="hasAuthority('ADMIN') or hasAuthority('RESEARCHER')" method="post" th:action="${'/copyright/filter'}">
+  <input type="text" name="certificateNumber">
+  <button type="submit">Найти</button>
+  <div th:each="el : ${result}">
+    <p th:text="${el.certificateNumber}"></p>
+    <p th:text="${el.nameSubject}"></p>
+    <from th:each="addr : ${el.getEmployees()}">
+      <a th:text="${addr.getSurname()}"></a>
+    </from>
+    <from th:each="addr : ${el.getOrgProd()}">
+      <a th:text="${addr.getNameOrganization()}"></a>
+    </from>
+  </div>
+</form>
+<hr/>
+<div th:each="el : ${copyright}">
+  <p><b>Номер сертификата:</b></p>
+  <p th:text="${el.certificateNumber}"></p>
+  <p><b>Обьект сертифицирования:</b></p>
+  <p th:text="${el.nameSubject}"></p>
+  <p><b>Сотрудник:</b></p>
+  <from th:each="addr : ${el.getEmployees()}">
+    <a th:text="${addr.getSurname()}"></a>
+  </from>
+  <p><b>Назавние организации:</b></p>
+  <from th:each="addr : ${el.getOrgProd()}">
+    <a th:text="${addr.getNameOrganization()}"></a>
+  </from>
+  <br/>
+  <a th:href="'/copyright/' + ${el.id} + '/edit'" class="edit">Редактирование</a>
+  <a th:href="'/copyright/' + ${el.id} + '/remove'" class="delete">Удаление</a>
+</div>
+</body>
+</html>

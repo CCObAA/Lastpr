@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<form method="post" th:each="el: ${reports}" th:object="${reports}">
+    <h1>Редактирование отчёта</h1>
+    <br>
+    <p>Название исследования:</p>
+    <div><input type="text" name="nameResearch" placeholder="Название исследования" th:value="${el.nameResearch}" ></div>
+    <div th:if="${#fields.hasErrors('nameResearch')}" th:errors="*{nameResearch}"></div>
+    <div><input type="text" name="resultResearch" placeholder="Результат исследования" th:value="${el.resultResearch}"></div>
+    <div th:if="${#fields.hasErrors('resultResearch')}" th:errors="*{resultResearch}"></div>
+    <p>Сотрудник:</p>
+    <div> <select name="surname">
+        <div th:each="element : ${employees}">
+            <option th:text="${element.surname}"></option>
+        </div>
+    </select></div>
+    <p>Название организации:</p>
+    <div> <select name="nameOrganization">
+        <div th:each="element : ${orgproj}">
+            <option th:text="${element.nameOrganization}"></option>
+        </div>
+    </select></div>
+    <p>Тип исследования:</p>
+    <div> <select name="nameResearchType">
+        <div th:each="element : ${researchtypes}">
+            <option th:text="${element.nameResearchType}"></option>
+        </div>
+    </select></div>
+    <button type="submit">Изменить</button>
+</form>
+</body>
+</html>

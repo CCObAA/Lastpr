@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Звезды</title>
+  <!-- CSS only -->
+
+</head>
+<body>
+
+<div th:insert="blocks/header" ></div>
+
+<div>
+  <h1 th:text="'Пользователь : ' + ${user_object.username}"></h1>
+  <div>
+    <h2 th:text="'Роли : ' + ${user_object.roles}"></h2>
+    <p th:text="${user_object.active} == True ? 'Пользователь: Активный' : 'Пользователь: Неактивный'"></p>
+  </div>
+  <a th:href="'/admin/' + ${user_object.id} + '/update'">Редактировать</a>
+  <a href="/admin/a">Назад</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{static/css/style.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body class="xback">
+<h1>Все сотрудники</h1>
+<form method="post" th:action="${'/employee/filter'}">
+  <input type="text" name="surname">
+  <button type="submit">Найти</button>
+  <div th:each="el : ${result}">
+  <p th:text="${el.surname}"></p>
+  <p th:text="${el.height}"></p>
+  <p th:text="${el.lovecookie}"></p>
+  <p th:text="${el.favnumber}"></p>
+  <p th:text="${el.weight}"></p>
+  </div>
+
+</form>
+<div th:each="el : ${employees}">
+<p th:text="${el.surname}"></p>
+<p th:text="${el.height}"></p>
+<p th:text="${el.lovecookie}"></p>
+<p th:text="${el.favnumber}"></p>
+<p th:text="${el.weight}"></p>
+<a th:href="'/employee/' + ${el.id} + '/edit'" class="edit">Редактирование</a>
+<a th:href="'/employee/' + ${el.id} + '/remove'" class="delete">Удаление</a>
+</div>
+  <form th:action="${'/employee/add'}" method="post">
+    <input type="text" name="surname" placeholder="Введите Фамилию">
+    <input type="number" name="height" placeholder="Рост">
+    <input type="checkbox" name="lovecookie" placeholder="Люблю печенье?">
+    <input type="number" name="favnumber" placeholder="Любимое число">
+    <input type="number" name="weight" placeholder="Вес">
+    <br>
+    <button type="submit">Добавить сотрудника</button>
+  </form>
+
+<form method="post" th:each="el: ${employee}">
+  <h1>Редактирование</h1>
+  <br>
+  <input type="text" name="surname" placeholder="Введите Фамилию" th:value="${el.surname}">
+  <input type="number" name="height" placeholder="Рост" th:value="${el.height}">
+  <input type="checkbox" name="lovecookie" placeholder="Люблю печенье?" th:checked="${el.lovecookie}">
+  <input type="number" name="favnumber" placeholder="Любимое число" th:value="${el.favnumber}">
+  <input type="number" name="weight" placeholder="Вес" th:value="${el.weight}">
+  <button type="submit">Изменить</button>
+</form>
+</body>
+</html>

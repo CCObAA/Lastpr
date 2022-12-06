@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div th:each="el: ${post}">
+  <h3>Подробнее про должность: </h3> <h3 th:text="${el.maxsalary}"></h3>
+  <p>Платим?</p>
+  <p th:text="${el.paid}"></p>
+  <p>Название должности</p>
+  <p th:text="${el.namepost}"></p>
+  <a th:href="'/post/' + ${el.id} + '/edit'">Редактировать</a>
+  <form th:action="'/post/' + ${el.id} + '/remove'" method="post">
+    <button type="submit" class="btn btn-del">Удалить</button>
+  </form>
+</div>
+</body>
+</html>

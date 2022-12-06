@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Добавление авторского свидетельства</h1></div>
+
+<form th:action="${'/copyright/add'}" method="post" th:object="${copyright}">
+    <div><input type="text" name="certificateNumber" placeholder="Номер сертификата"></div>
+    <div th:if="${#fields.hasErrors('certificateNumber')}" th:errors="*{certificateNumber}"></div>
+    <div><input type="text" name="nameSubject" placeholder="Предмет свидетельства"></div>
+    <div th:if="${#fields.hasErrors('nameSubject')}" th:errors="*{nameSubject}"></div>
+    <p>Сотрудник:</p>
+    <div><select name="surname">
+        <div th:each="element : ${employees}">
+            <option th:text="${element.surname}"></option>
+        </div>
+    </select></div>
+    <p>Название организации:</p>
+    <div><select name="nameOrganization">
+        <div th:each="element : ${orgproj}">
+            <option th:text="${element.nameOrganization}"></option>
+        </div>
+    </select></div>
+    <br>
+    <button type="submit">Добавить</button>
+</form>
+</body>
+</html>

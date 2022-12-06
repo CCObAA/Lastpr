@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Добавление новой должности</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<form th:action="${'/post/add'}" th:object="${posts}" method="post">
+  <div><input required type="number" name="maxsalary" placeholder="Максимальная зарплата"></div>
+  <div th:if="${#fields.hasErrors('maxsalary')}" th:errors="*{maxsalary}"></div>
+  <p>Платим?</p>
+  <div><input type="checkbox" name="paid" placeholder="Платим за эту должность?"></div>
+  <div th:if="${#fields.hasErrors('paid')}" th:errors="*{paid}"></div>
+  <div><textarea name="namepost" placeholder="Наименование должности"></textarea></div>
+  <div th:if="${#fields.hasErrors('namepost')}" th:errors="*{namepost}"></div>
+  <div><input required type="number" name="salary" placeholder="Зарплата"></div>
+  <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+  <div><input required type="number" name="countemploey" placeholder="сколько таких сотрудников"></div>
+  <div th:if="${#fields.hasErrors('countemploey')}" th:errors="*{countemploey}"></div>
+  <br>
+  <button type="submit">Добавить должность</button>
+</form>
+</body>
+</html>

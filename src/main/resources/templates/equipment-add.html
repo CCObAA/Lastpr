@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Добавление оборудования</h1></div>
+
+<form th:action="${'/equipment/add'}" method="post" th:object="${equipment}">
+    <div><input type="number" name="quantities" placeholder="Количество"></div>
+    <div th:if="${#fields.hasErrors('quantities')}" th:errors="*{quantities}"></div>
+    <div><input type="text" name="nameEquipment" placeholder="Название оборудования"></div>
+    <div th:if="${#fields.hasErrors('nameEquipment')}" th:errors="*{nameEquipment}"></div>
+    <p>Сотрудник:</p>
+    <div><select name="surname">
+        <div th:each="element : ${employee}">
+            <option th:text="${element.surname}"></option>
+        </div>
+    </select></div>
+    <br>
+    <button type="submit">Добавить оборудование</button>
+</form>
+</body>
+</html>

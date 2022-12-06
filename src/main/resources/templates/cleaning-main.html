@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<h1>Отметки уборки</h1>
+<a th:href="'/cleaning/add'">Добавить отметку</a>
+<hr/>
+<div th:each="el : ${cleaningSchedueles}">
+    <p><b>Дата уборки:</b></p>
+    <div><p th:text="${el.date_cleaning}"></p></div>
+    <hr/>
+    <p><b>Сотрудник:</b></p>
+    <div><from th:each="addr : ${el.getEmployees()}">
+        <a th:text="${addr.getSurname()}"></a>
+    </from></div>
+    <br/>
+    <a th:href="'/cleaning/' + ${el.id} + '/remove'" class="delete">Удаление</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Добавление отчёта</h1></div>
+
+<form th:action="${'/reports/add'}" method="post" th:object="${reports}">
+
+    <div><input type="text" name="nameResearch" placeholder="Название исследования"></div>
+    <div th:if="${#fields.hasErrors('nameResearch')}" th:errors="*{nameResearch}"></div>
+    <div><input type="text" name="resultResearch" placeholder="Результат исследования"></div>
+    <div th:if="${#fields.hasErrors('resultResearch')}" th:errors="*{resultResearch}"></div>
+    <p>Сотрудник:</p>
+    <div> <select name="surname">
+        <div th:each="element : ${employees}">
+            <option th:text="${element.surname}"></option>
+        </div>
+    </select></div>
+    <p>Название организации:</p>
+    <div><select name="nameOrganization">
+        <div th:each="element : ${orgproj}">
+            <option th:text="${element.nameOrganization}"></option>
+        </div>
+    </select></div>
+    <p>Тип исследования:</p>
+    <div> <select name="nameResearchType">
+        <div th:each="element : ${researchtypes}">
+            <option th:text="${element.nameResearchType}"></option>
+        </div>
+    </select></div>
+    <br>
+    <button type="submit">Добавить</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/headers.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Добавление отметки о уборке</h1></div>
+
+<form th:action="${'/cleaning/add'}" method="post">
+  <p>Дата уборки:</p>
+  <div><input type="date" name="Date_cleaning"></div>
+  <hr/>
+  <p>Сотрудник:</p>
+  <div><select name="surname">
+    <div th:each="element : ${employee}">
+      <option th:text="${element.surname}"></option>
+    </div>
+  </select></div>
+  <br>
+  <button type="submit">Добавить отметку</button>
+  </div>
+</form>
+</body>
+</html>

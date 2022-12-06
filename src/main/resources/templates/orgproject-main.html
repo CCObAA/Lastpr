@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<h1>Редактирование проект</h1>
+<a sec:authorize="hasAuthority('ADMIN') or hasAuthority('PROJECT')" th:href="'/orgproject/add'">Добавить проект</a>
+<hr/>
+<form sec:authorize="hasAuthority('ADMIN') or hasAuthority('PROJECT')" method="post" th:action="${'/orgproject/filter'}">
+  <input type="text" name="nameOrganization">
+  <button type="submit">Найти</button>
+  <div th:each="el : ${result}">
+    <p th:text="${el.nameOrganization}"></p>
+    <p th:text="${el.salaryProject}"></p>
+    <from th:each="addr : ${el.getProjectType()}">
+      <a th:text="${addr.getTypeProject()}"></a>
+    </from>
+    <from th:each="addr : ${el.getProjectStatus()}">
+      <a th:text="${addr.getNameProjectStatus()}"></a>
+    </from>
+  </div>
+</form>
+<hr/>
+<div th:each="el : ${orgproject}">
+  <p><b>Название организации:</b></p>
+  <p th:text="${el.nameOrganization}"></p>
+  <p><b>Выделенные средства:</b></p>
+  <p th:text="${el.salaryProject}"></p>
+  <p><b>Регион проведения:</b></p>
+  <p th:text="${el.regionalLocation}"></p>
+  <p><b>Описание проекта:</b></p>
+  <p th:text="${el.projectDescription}"></p>
+  <p><b>Тип проекта:</b></p>
+  <from th:each="addr : ${el.getProjectType()}">
+    <a th:text="${addr.getTypeProject()}"></a>
+  </from>
+  <p><b>Статус проекта:</b></p>
+  <from th:each="addr : ${el.getProjectStatus()}">
+    <a th:text="${addr.getNameProjectStatus()}"></a>
+  </from>
+  <br/>
+  <a th:href="'/orgproject/' + ${el.id} + '/edit'" class="edit">Редактирование</a>
+  <a th:href="'/orgproject/' + ${el.id} + '/remove'" class="delete">Удаление</a>
+</div>
+</body>
+</html>

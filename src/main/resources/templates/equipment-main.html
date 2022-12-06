@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<h1>Редактирование оборудования</h1>
+<a sec:authorize="hasAuthority('ADMIN') or hasAuthority('CLEANER')" th:href="'/equipment/add'">Добавить оборудование</a>
+<hr/>
+<form sec:authorize="hasAuthority('ADMIN') or hasAuthority('CLEANER')" method="post" th:action="${'/equipment/filter'}">
+  <input type="text" name="nameEquipment">
+  <button type="submit">Найти</button>
+  <div th:each="el : ${result}">
+    <p th:text="${el.quantities}"></p>
+    <p th:text="${el.nameEquipment}"></p>
+    <from th:each="addr : ${el.getEmployee()}">
+      <a th:text="${addr.getSurname()}"></a>
+    </from>
+  </div>
+</form>
+<hr/>
+<div th:each="el : ${equipment}">
+  <p><b>Количество:</b></p>
+  <p th:text="${el.quantities}"></p>
+  <p><b>Название оборудования:</b></p>
+  <p th:text="${el.nameEquipment}"></p>
+  <p><b>Сотрудник:</b></p>
+  <from th:each="addr : ${el.getEmployee()}">
+    <a th:text="${addr.getSurname()}"></a>
+  </from>
+  <br/>
+  <a th:href="'/equipment/' + ${el.id} + '/edit'" class="edit">Редактирование</a>
+  <a th:href="'/equipment/' + ${el.id} + '/remove'" class="delete">Удаление</a>
+</div>
+</body>
+</html>

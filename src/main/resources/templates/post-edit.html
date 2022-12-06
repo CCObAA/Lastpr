@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Редактирование статьи</title>
+  <meta charset="UTF-8">
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+  <form method="post" th:object="${post}">
+    <input required type="number" th:field="*{maxsalary}" id="maxsalary" th:value="${maxsalary}" name="maxsalary" placeholder="Введите максимальную зарплату">
+    <div th:if="${#fields.hasErrors('maxsalary')}" th:errors="*{maxsalary}"></div>
+    <input type="checkbox" th:field="*{paid}" id="paid" th:checked="${paid}" name="paid">
+    <div th:if="${#fields.hasErrors('paid')}" th:errors="*{paid}"></div>
+    <input type="text" th:field="*{namepost}" id="namepost" th:value="${namepost}" name="namepost" placeholder="Введите название должности">
+    <div th:if="${#fields.hasErrors('namepost')}" th:errors="*{namepost}"></div>
+    <textarea required type="number" id="salary" th:field="*{salary}" th:text="${salary}" name="salary" ></textarea>
+    <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+    <input required type="number" id="countemploey" th:field="*{countemploey}" th:value="${countemploey}" name="countemploey" placeholder="Введите количество таких сотрудников">
+    <div th:if="${#fields.hasErrors('countemploey')}" th:errors="*{countemploey}"></div>
+    <br>
+    <button type="submit">Сохранить изменения</button>
+  </form>
+</body>
+</html>

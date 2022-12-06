@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Добавление инструментов к проектам</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<h1>Добавление инструментов к проектам</h1>
+
+<form th:action="${'/reports/equipment/add'}" method="post">
+  <p>Название исследования:</p>
+  <div><select name="research">
+    <div th:each="element : ${reports}">
+      <option th:value="${element.id}" th:text="${element.nameResearch}"></option>
+    </div>
+  </select></div>
+  <p>Оборудование:</p>
+  <div><select name="equipmen">
+    <div th:each="element : ${equipment}">
+      <option th:value="${element.id}" th:text="${element.nameEquipment}"></option>
+    </div>
+  </select></div>
+  <br>
+  <button type="submit">Добавить</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<h1>Редактирование сотрудника</h1>
+<form method="post" th:each="el: ${employees}">
+    <h1>Редактирование</h1>
+    <br>
+    <input type="text" name="surname" placeholder="Фамилия" th:value="${el.surname}">
+    <input type="text" name="name" placeholder="Имя" th:value="${el.name}">
+    <input type="text" name="patronymic" placeholder="Отчество" th:value="${el.patronymic}">
+    <button type="submit">Изменить</button>
+</form>
+</body>
+</html>

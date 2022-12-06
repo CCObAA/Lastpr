@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/site.css}" rel="stylesheet" />
+    <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Добавление проекта</h1></div>
+
+<form th:action="${'/orgproject/add'}" method="post" th:object="${orgproject}">
+    <div><input type="text" name="nameOrganization" placeholder="Название организации"></div>
+    <div th:if="${#fields.hasErrors('nameOrganization')}" th:errors="*{nameOrganization}"></div>
+    <div><input required type="number" name="salaryProject" placeholder="Выделенные деньги"></div>
+    <div th:if="${#fields.hasErrors('salaryProject')}" th:errors="*{salaryProject}"></div>
+    <div> <input type="text" name="regionalLocation" placeholder="Регион"></div>
+    <div th:if="${#fields.hasErrors('regionalLocation')}" th:errors="*{regionalLocation}"></div>
+    <div> <textarea type="text" name="projectDescription" placeholder="Описание проекта"></textarea></div>
+    <div th:if="${#fields.hasErrors('projectDescription')}" th:errors="*{projectDescription}"></div>
+    <p>Тип проекта:</p>
+    <div> <select name="typeProject">
+        <div th:each="element : ${projecttypes}">
+            <option th:text="${element.typeProject}"></option>
+        </div>
+    </select></div>
+    <p>Статус проекта:</p>
+    <div><select name="nameProjectStatus">
+        <div th:each="element : ${projectstatus}">
+            <option th:text="${element.nameProjectStatus}"></option>
+        </div>
+    </select></div>
+    <br>
+    <button type="submit">Добавить оборудование</button>
+</form>
+</body>
+</html>

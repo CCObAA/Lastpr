@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link th:href="@{/css/site.css}" rel="stylesheet" />
+  <div th:insert="blocks/header" ></div>
+</head>
+<body>
+<div class=ex1><h1>Добавление типа исследования</h1></div>
+<p>Тип исследования:</p>
+<form th:action="${'/researchtype/add'}" method="post">
+  <input type="text" name="nameResearchType">
+  <br>
+  <button type="submit">Добавить</button>
+</form>
+</body>
+</html>
